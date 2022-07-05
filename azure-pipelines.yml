@@ -14,7 +14,7 @@ steps:
     displayName: 'Building'
     inputs:
       gradleWrapperFile: 'gradlew'
-      workingDirectory: './gradlew'
+      workingDirectory: '.'
       tasks: 'clean build'
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
