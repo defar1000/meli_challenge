@@ -1,1 +1,1 @@
-web: java -Dserver.port=40583 $JAVA_OPTS -jar applications/app-service/build/libs/*.jar
+web: java -Dserver.port=$PORT -jar applications/app-service/build/libs/*.jar
