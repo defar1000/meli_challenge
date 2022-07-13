@@ -1,14 +1,20 @@
 package co.com.mercadolibre.usecase.mutant;
 
 import co.com.mercadolibre.model.person.Person;
-import lombok.RequiredArgsConstructor;
+import co.com.mercadolibre.model.person.gateways.PersonRepository;
+import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class MutantUseCase {
+
+    private final PersonRepository personRepository;
+
     public boolean isMutant(Person person){
-        return isMutant(person.getDna());
+        person.setMutant(isMutant(person.getDna()));
+        personRepository.savePerson(person);
+        return person.isMutant();
     }
 
     private boolean isMutant(ArrayList<String> dna){

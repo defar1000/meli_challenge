@@ -1,13 +1,16 @@
 package co.com.mercadolibre.model.person;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.IllegalFormatFlagsException;
 
+@Data
 @NoArgsConstructor
 public class Person {
     private ArrayList<String> dna;
+    private boolean mutant;
 
     public void setDna(ArrayList<String> dna){
         if(dna.size()!=6) throw new IllegalFormatFlagsException("Tamaño del ADN invalido");
@@ -19,10 +22,6 @@ public class Person {
             }
         });
         this.dna = dna;
-    }
-
-    public ArrayList<String> getDna(){
-        return dna;
     }
 
     private boolean validateBaseNitrogenada(char c){
