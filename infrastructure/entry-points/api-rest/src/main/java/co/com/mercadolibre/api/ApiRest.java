@@ -1,8 +1,11 @@
 package co.com.mercadolibre.api;
+
+import co.com.mercadolibre.model.person.Person;
 import co.com.mercadolibre.usecase.mutant.MutantUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,8 +16,8 @@ public class ApiRest {
     private final MutantUseCase useCase;
 
 
-    @GetMapping(path = "/mutant")
-    public boolean isMutant() {
-      return useCase.isMutant();
+    @PostMapping(path = "/mutant")
+    public boolean isMutant(@RequestBody Person person) {
+      return useCase.isMutant(person);
     }
 }
