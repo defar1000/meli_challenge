@@ -13,7 +13,7 @@ spring:
     include: null
   data:
     mongodb:
-      uri: "mongodb+srv://admin:@meli.vohwshc.mongodb.net/mutantsDB"
+      uri: "mongodb+srv://admin:admin@meli.vohwshc.mongodb.net/mutantsDB"
 management:
   endpoints:
     web:

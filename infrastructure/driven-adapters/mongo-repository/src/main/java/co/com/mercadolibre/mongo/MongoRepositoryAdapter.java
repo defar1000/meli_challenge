@@ -17,28 +17,27 @@ public class MongoRepositoryAdapter extends AdapterOperations<Person, PersonDB, 
     private final Logger logger = Logger.getLogger(MongoRepositoryAdapter.class.getName());
 
     public MongoRepositoryAdapter(MongoDBRepository repository, ObjectMapper mapper) {
-        /**
-         *  Could be use mapper.mapBuilder if your domain model implement builder pattern
-         *  super(repository, mapper, d -> mapper.mapBuilder(d,ObjectModel.ObjectModelBuilder.class).build());
-         *  Or using mapper.map with the class of the object model
-         */
         super(repository, mapper, d -> mapper.map(d, Person.class));
     }
 
     @Override
     public Person savePerson(Person person) {
-        Person result = this.save(person);
+        Person result = save(person);
         logger.info("Save person: "+person.toString());
         return result;
     }
 
     @Override
-    public int getCountPersons() {
-        return 0;
+    public long getCountHumans() {
+        long result = repository.countPersons();
+        logger.info("Conteo de personas:"+result);
+        return result;
     }
 
     @Override
-    public int getCountMutants() {
-        return 0;
+    public long getCountMutants() {
+        long result = repository.countMutants();
+        logger.info("Conteo de mutantes:"+result);
+        return result;
     }
 }

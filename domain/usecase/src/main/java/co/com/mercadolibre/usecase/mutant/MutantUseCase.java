@@ -34,6 +34,13 @@ public class MutantUseCase {
         return totalDnaGroup > 1;
     }
 
+    public String stats(){
+        long countMutants=personRepository.getCountMutants();
+        long countHumans=personRepository.getCountHumans();
+        return String.format("'count_mutant_dna':%s, 'count_human_dna':%s: 'ratio':%s",
+                countMutants, countHumans, ((float)countMutants/countHumans));
+    }
+
     private boolean validate(char a, char b, char c, char d){
         return a==b && b==c && c==d;
     }
