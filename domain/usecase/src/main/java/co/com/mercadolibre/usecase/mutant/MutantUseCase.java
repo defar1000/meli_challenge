@@ -11,10 +11,10 @@ public class MutantUseCase {
 
     private final PersonRepository personRepository;
 
-    public boolean isMutant(Person person){
+    public Person validateMutant(Person person){
         person.setMutant(isMutant(person.getDna()));
         personRepository.savePerson(person);
-        return person.isMutant();
+        return person;
     }
 
     private boolean isMutant(ArrayList<String> dna){
