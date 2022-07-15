@@ -1,1 +1,1 @@
-web: docker run deployment/Dockerfile
+web: java -Dserver.port=$PORT -jar applications/app-service/build/libs/*.jar
