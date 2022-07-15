@@ -35,8 +35,10 @@ jobs:
     needs: build
     steps:
       - uses: actions/checkout@v3
-      - name: CMD
-        run: cd applications
+#      - name: CMD
+#        run: cd applications
+#      - name: CMD
+#        run: cd applications
       - name: Build the Docker image
         run: docker build . --file deployment/Dockerfile --tag meli-challenge:$(date +%s)
   release:
