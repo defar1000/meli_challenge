@@ -23,10 +23,19 @@ subprojects {
         implementation platform("org.springframework.boot:spring-boot-dependencies:${springBootVersion}")
     }
 
-    test.finalizedBy(project.tasks.jacocoTestReport)
+    test {
+        useJUnitPlatform()
+        finalizedBy(project.tasks.jacocoTestReport)
+    }
 
     jacocoTestReport {
         dependsOn test
+
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: "**/mongo/**")
+            }))
+        }
         reports {
             xml.enabled true
             xml.destination file("${buildDir}/reports/jacoco.xml")
@@ -48,6 +57,15 @@ task jacocoMergedReport(type: JacocoReport) {
     sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
     classDirectories.setFrom files(subprojects.sourceSets.main.output)
     executionData.setFrom project.fileTree(dir: '.', include: '**/build/jacoco/test.exec')
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/mongo/*",
+                    "**/config/*",
+                    "**/MainApplication.*"
+            ])
+        }))
+    }
     reports {
         xml.enabled true
         csv.enabled false
